@@ -1,6 +1,7 @@
 import networkx as nx
 import numpy as np
 import time
+import math
 
 def findMinimumValue(matrix):
     """
@@ -52,3 +53,45 @@ def readMatrixfromFile(file):
     """
     return np.loadtxt(file)
 
+def jukesCantor(file):
+    """
+    Reads from an input file containing aligned sequences and creates a dissimilarity matrix.
+
+    Input:
+    file: python file object
+
+    Output:
+    matrix: numpy matrix object
+    """
+    sequences = []
+    for line in file:
+        sequences.append(line.strip())
+
+    matrix = np.zeros((len(sequences),len(sequences)))
+
+    i=0
+    j=0
+
+    for sequence1 in sequences:
+        j = 0
+        for sequence2 in sequences:
+            if sequence1 == sequence2:
+                matrix[i][j] = 0.
+            else:
+                numdiff = 0
+                for index in range(len(sequence1)):
+                    if sequence1[index] != sequence2[index]:
+                        numdiff += 1
+
+                if numdiff == len(sequence1) or (float(numdiff)/len(sequence1)) >= 0.75:
+                    return "Error"
+
+                distance = -0.75 * math.log(1- (4./3.)*(float(numdiff) / len(sequence1)), math.e)
+                matrix[i][j] = distance
+                matrix[j][i] = distance
+
+            j += 1
+
+        i += 1
+
+    return matrix

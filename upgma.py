@@ -1,8 +1,14 @@
 from upgma_lib import *
 
 def main():
-    txtfile = open("matrix.txt")
-    matrix = readMatrixfromFile(txtfile)
+    txtfile = open('sekvence.txt','r+')
+    matrix = jukesCantor(txtfile)
+
+    if matrix == "Error":
+        print "Greska"
+        return
+    else:
+        print matrix
 
     #names the existing original nodes with lowercase letters from a to z
     # (goes on in the ASCII if more than 28 nodes)
@@ -48,6 +54,7 @@ def main():
         print nodesArray
 
     return
+
 
 if __name__ == '__main__':
     start = time.time()
