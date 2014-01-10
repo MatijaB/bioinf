@@ -5,7 +5,7 @@ import os
 def main():
     txtfile = open('sekvence1.txt','r+')
     matrix = jukesCantor(txtfile, "FASTA")
-    nameList = namingList()
+    nameList = createNameList()
     #returns an error if the number of different characters between two sequences is over 75% of all characters
     if matrix == "Error":
         print "Greska"

@@ -4,14 +4,23 @@ import time
 import math
 
 class ElementaryNode():
+    """
+    Class describing a leaf in a Newick tree, only contains the alphabetic name
+    and the attribute minimum which is set to zero and exists for the sole purpose
+    of being compatible with the NewickNode class constructor.
+    """
     def __init__(self,name):
         self.name = name
-        self.minimum = 0
+        self.minimum = 0.
 
 class NewickNode():
+    """
+    Class describing a node in a Newick tree, constructed from it's children
+    children can be of same type or of ElementaryNode type
+    """
     def __init__(self, children, minimum):
         self.children = children
-        self.minimum = minimum/2
+        self.minimum = minimum/2.
         output = "("
         output += self.children[0].name
         output += ":"+str(self.minimum-self.children[0].minimum)
@@ -22,7 +31,17 @@ class NewickNode():
         #output += ":"+str(self.minimum/2.)
         self.name = output
 
-def namingList():
+def createNameList():
+    """
+    Creates a list with potential alphabetic names, starting with "A",
+    ending with "ZZ", containing all possible variations.
+
+    Input:
+    none
+
+    Output:
+    list: python list object
+    """
     list = []
     for i in range(ord("Z")+1-ord("A")):
         list.append(chr(ord("A")+i))
