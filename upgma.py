@@ -1,20 +1,23 @@
 from upgma_lib import *
+import sys
+import os
 
 def main():
-    txtfile = open('sekvence.txt','r+')
-    matrix = jukesCantor(txtfile)
-
+    txtfile = open('sekvence1.txt','r+')
+    matrix = jukesCantor(txtfile, "FASTA")
+    nameList = namingList()
+    #returns an error if the number of different characters between two sequences is over 75% of all characters
     if matrix == "Error":
         print "Greska"
         return
-    else:
-        print matrix
+    #else:
+    #    print matrix
 
     #names the existing original nodes with lowercase letters from a to z
     # (goes on in the ASCII if more than 28 nodes)
-    nodesArray = [str(unichr(97+i)) for i in range(len(matrix))]
+    nodesArray = [ElementaryNode(nameList[i]) for i in range(len(matrix))]
 
-    print nodesArray
+    #print [node.name for node in nodesArray]
 
     while(len(matrix)>2):
 
@@ -38,12 +41,17 @@ def main():
 
 
         #construct the cluster name as a compound of former names, while making sure it's in alphabet order
-        if ord(nodesArray[minimum[2]][0]) < ord(nodesArray[minimum[1]][0]):
-            newClusterLetter= nodesArray[minimum[2]]+nodesArray[minimum[1]]
+        children = []
+        if ord(nodesArray[minimum[2]].name[0]) < ord(nodesArray[minimum[1]].name[0]):
+            #newClusterLetter= nodesArray[minimum[2]]+nodesArray[minimum[1]]
+            children.append(nodesArray[minimum[2]])
+            children.append(nodesArray[minimum[1]])
         else:
-            newClusterLetter= nodesArray[minimum[1]]+nodesArray[minimum[2]]
+            #newClusterLetter= nodesArray[minimum[1]]+nodesArray[minimum[2]]
+            children.append(nodesArray[minimum[1]])
+            children.append(nodesArray[minimum[2]])
 
-        nodesArray[minimum[2]] = newClusterLetter
+        nodesArray[minimum[2]] = NewickNode(children, minimum[0])
         nodesArray.remove(nodesArray[minimum[1]])
 
         #removes the row and column of the other member of the newly-formed cluster, thereby
@@ -51,13 +59,30 @@ def main():
         matrix = np.delete(matrix,minimum[1],0)
         matrix = np.delete(matrix,minimum[1],1)
 
-        print nodesArray
+        #print [node.name for node in nodesArray]
 
-    return
+    return nodesArray, matrix
 
 
 if __name__ == '__main__':
     start = time.time()
-    main()
+    array, matrix = main()
+
+    #print matrix[0][1]
+
+    lastNode = NewickNode(array, matrix[0][1])
+
+    #print lastNode.name
+
+
+    file = open("newick.txt",'w+')
+
+    file.write(lastNode.name+";")
+
+    file.close()
+
+
+    os.system("njplot newick.txt")
+
     end = time.time()
     print end - start
