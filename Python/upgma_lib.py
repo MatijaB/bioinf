@@ -112,9 +112,12 @@ def jukesCantor(fileObject, typeOfInput):
                     tmpSequence = ""
             else:
                 tmpSequence += line.strip()
+        sequences.append(tmpSequence)
+
     else:
         for line in fileObject:
             sequences.append(line.strip())
+
 
     sequenceLength = len(sequences[0])
     numberOfSequences = len(sequences)
@@ -153,6 +156,7 @@ def kimura(fileObject, typeOfInput):
     sequences = []
     nameList = []
     tmpSequence = ""
+
     if typeOfInput == "FASTA":
         for line in fileObject:
             if line[0] == '>':
@@ -162,9 +166,12 @@ def kimura(fileObject, typeOfInput):
                     tmpSequence = ""
             else:
                 tmpSequence += line.strip()
+        sequences.append(tmpSequence)
+
     else:
         for line in fileObject:
             sequences.append(line.strip())
+
 
     sequenceLength = len(sequences[0])
     numberOfSequences = len(sequences)
@@ -195,4 +202,4 @@ def kimura(fileObject, typeOfInput):
             matrix[j][i] = distance
         print i
 
-    return matrix
+    return matrix, nameList
