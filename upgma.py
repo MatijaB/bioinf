@@ -1,15 +1,20 @@
 from upgma_lib import *
-import sys
 import os
+import time
 
-def main():
-    txtfile = open('sekvence1.txt','r+')
-    matrix = jukesCantor(txtfile, "FASTA")
+def main(distanceFunction):
+    txtfile = open('sekvence1.txt', 'r+')
+    start = time.time()
+    matrix = distanceFunction(txtfile, "FASTA")
+    end = time.time()
+    print end - start
+    start = time.time()
     nameList = createNameList()
     #returns an error if the number of different characters between two sequences is over 75% of all characters
     if matrix == "Error":
         print "Greska"
         return
+
     #else:
     #    print matrix
 
@@ -19,7 +24,7 @@ def main():
 
     #print [node.name for node in nodesArray]
 
-    while(len(matrix)>2):
+    while len(matrix) > 2:
 
         minimum = findMinimumValue(matrix)
 
@@ -28,17 +33,16 @@ def main():
         newClusterValues = []
         for i in range(len(matrix)):
             if i != minimum[1] and i != minimum[2]:
-                newClusterValues.append( (matrix[minimum[1]][i]+matrix[minimum[2]][i]) / 2 )
+                newClusterValues.append((matrix[minimum[1]][i]+matrix[minimum[2]][i]) / 2)
 
         #puts the new dissimilarity values of the created cluster where the values of
         #one of the two cluster-forming members used to be in the matrix
         counter = 0
         for i in range(len(matrix)):
-            if i != minimum[2] and i!= minimum[1]:
+            if i != minimum[2] and i != minimum[1]:
                 matrix[minimum[2]][i] = newClusterValues[counter]
                 matrix[i][minimum[2]] = newClusterValues[counter]
                 counter += 1
-
 
         #construct the cluster name as a compound of former names, while making sure it's in alphabet order
         children = []
@@ -56,31 +60,26 @@ def main():
 
         #removes the row and column of the other member of the newly-formed cluster, thereby
         #reducing the matrix size by one
-        matrix = np.delete(matrix,minimum[1],0)
-        matrix = np.delete(matrix,minimum[1],1)
+        matrix = np.delete(matrix, minimum[1],0)
+        matrix = np.delete(matrix, minimum[1],1)
 
         #print [node.name for node in nodesArray]
-
+    end = time.time()
+    print end - start
     return nodesArray, matrix
 
 
 if __name__ == '__main__':
     start = time.time()
-    array, matrix = main()
-
-    #print matrix[0][1]
+    array, matrix = main(kimura)
 
     lastNode = NewickNode(array, matrix[0][1])
 
-    #print lastNode.name
+    NewFile = open("newick.txt",'w+')
 
+    NewFile.write(lastNode.name+";")
 
-    file = open("newick.txt",'w+')
-
-    file.write(lastNode.name+";")
-
-    file.close()
-
+    NewFile.close()
 
     os.system("njplot newick.txt")
 
