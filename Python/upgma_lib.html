@@ -1,0 +1,106 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module upgma_lib</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>upgma_lib</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/heisenberg/Dropbox/Fask/Peta/BioInf/bioinf/Python/upgma_lib.py">/home/heisenberg/Dropbox/Fask/Peta/BioInf/bioinf/Python/upgma_lib.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="upgma_lib.html#ElementaryNode">ElementaryNode</a>
+</font></dt><dt><font face="helvetica, arial"><a href="upgma_lib.html#NewickNode">NewickNode</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ElementaryNode">class <strong>ElementaryNode</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Class&nbsp;describing&nbsp;a&nbsp;leaf&nbsp;in&nbsp;a&nbsp;Newick&nbsp;tree,&nbsp;only&nbsp;contains&nbsp;the&nbsp;alphabetic&nbsp;name<br>
+and&nbsp;the&nbsp;attribute&nbsp;minimum&nbsp;which&nbsp;is&nbsp;set&nbsp;to&nbsp;zero&nbsp;and&nbsp;exists&nbsp;for&nbsp;the&nbsp;sole&nbsp;purpose<br>
+of&nbsp;being&nbsp;compatible&nbsp;with&nbsp;the&nbsp;<a href="#NewickNode">NewickNode</a>&nbsp;class&nbsp;constructor.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ElementaryNode-__init__"><strong>__init__</strong></a>(self, name)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NewickNode">class <strong>NewickNode</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Class&nbsp;describing&nbsp;a&nbsp;node&nbsp;in&nbsp;a&nbsp;Newick&nbsp;tree,&nbsp;constructed&nbsp;from&nbsp;it's&nbsp;children<br>
+children&nbsp;can&nbsp;be&nbsp;of&nbsp;same&nbsp;type&nbsp;or&nbsp;of&nbsp;<a href="#ElementaryNode">ElementaryNode</a>&nbsp;type<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NewickNode-__init__"><strong>__init__</strong></a>(self, children, minimum)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-createNameList"><strong>createNameList</strong></a>()</dt><dd><tt>Creates&nbsp;a&nbsp;list&nbsp;with&nbsp;potential&nbsp;alphabetic&nbsp;names,&nbsp;starting&nbsp;with&nbsp;"A",<br>
+ending&nbsp;with&nbsp;"ZZ",&nbsp;containing&nbsp;all&nbsp;possible&nbsp;variations.<br>
+&nbsp;<br>
+Input:<br>
+none<br>
+&nbsp;<br>
+Output:<br>
+nameList:&nbsp;python&nbsp;list&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-findMinimumValue"><strong>findMinimumValue</strong></a>(matrix)</dt><dd><tt>Finds&nbsp;the&nbsp;minimum&nbsp;value&nbsp;in&nbsp;the&nbsp;lower&nbsp;triangulate&nbsp;of&nbsp;a&nbsp;square&nbsp;matrix,<br>
+complexity&nbsp;O(nlog(n))<br>
+&nbsp;<br>
+Input:<br>
+matrix:&nbsp;numpy&nbsp;matrix&nbsp;object<br>
+&nbsp;<br>
+Output:<br>
+python&nbsp;list&nbsp;object&nbsp;containing&nbsp;the&nbsp;minimum&nbsp;value&nbsp;and&nbsp;its&nbsp;indices</tt></dd></dl>
+ <dl><dt><a name="-jukesCantor"><strong>jukesCantor</strong></a>(fileObject, typeOfInput)</dt><dd><tt>Reads&nbsp;from&nbsp;an&nbsp;input&nbsp;file&nbsp;containing&nbsp;aligned&nbsp;sequences&nbsp;and&nbsp;creates&nbsp;a&nbsp;dissimilarity&nbsp;matrix.<br>
+Uses&nbsp;the&nbsp;Jukes&nbsp;Cantor&nbsp;(JC69)&nbsp;DNA&nbsp;Model<br>
+Input:<br>
+file:&nbsp;python&nbsp;file&nbsp;object<br>
+&nbsp;<br>
+Output:<br>
+matrix:&nbsp;numpy&nbsp;matrix&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-kimura"><strong>kimura</strong></a>(fileObject, typeOfInput)</dt><dd><tt>Reads&nbsp;from&nbsp;an&nbsp;input&nbsp;file&nbsp;containing&nbsp;aligned&nbsp;sequences&nbsp;and&nbsp;creates&nbsp;a&nbsp;dissimilarity&nbsp;matrix.<br>
+Uses&nbsp;the&nbsp;Kimura&nbsp;(K80)&nbsp;DNA&nbsp;Model<br>
+&nbsp;<br>
+Input:<br>
+file:&nbsp;python&nbsp;file&nbsp;object<br>
+&nbsp;<br>
+Output:<br>
+matrix:&nbsp;numpy&nbsp;matrix&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-readMatrixfromFile"><strong>readMatrixfromFile</strong></a>(filename)</dt><dd><tt>Reads&nbsp;from&nbsp;an&nbsp;input&nbsp;file&nbsp;and&nbsp;creates&nbsp;a&nbsp;numpy&nbsp;matrix&nbsp;object.<br>
+&nbsp;<br>
+Input:<br>
+file:&nbsp;python&nbsp;file&nbsp;object<br>
+&nbsp;<br>
+Output:<br>
+matrix:&nbsp;numpy&nbsp;matrix&nbsp;object</tt></dd></dl>
+</td></tr></table>
+</body></html>
