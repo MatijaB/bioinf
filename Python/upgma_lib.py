@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import numpy as np
 import math
 
@@ -112,16 +114,20 @@ def jukesCantor(fileObject, typeOfInput):
                     tmpSequence = ""
             else:
                 tmpSequence += line.strip()
+        sequences.append(tmpSequence)
+
     else:
         for line in fileObject:
             sequences.append(line.strip())
+
 
     sequenceLength = len(sequences[0])
     numberOfSequences = len(sequences)
 
     matrix = np.zeros((numberOfSequences, numberOfSequences))
 
-    #print numberOfSequences
+    print "Number of sequences: ",
+    print numberOfSequences
 
     for i in range(numberOfSequences-1):
         for j in range(i+1,numberOfSequences):
@@ -135,7 +141,6 @@ def jukesCantor(fileObject, typeOfInput):
             distance = -0.75 * math.log(1 - (4./3.)*(float(numdiff) / sequenceLength), math.e)
             matrix[i][j] = distance
             matrix[j][i] = distance
-        print i
 
     return matrix, nameList
 
@@ -153,6 +158,7 @@ def kimura(fileObject, typeOfInput):
     sequences = []
     nameList = []
     tmpSequence = ""
+
     if typeOfInput == "FASTA":
         for line in fileObject:
             if line[0] == '>':
@@ -162,12 +168,18 @@ def kimura(fileObject, typeOfInput):
                     tmpSequence = ""
             else:
                 tmpSequence += line.strip()
+        sequences.append(tmpSequence)
+
     else:
         for line in fileObject:
             sequences.append(line.strip())
 
+
     sequenceLength = len(sequences[0])
     numberOfSequences = len(sequences)
+
+    print "Number of sequences: ",
+    print numberOfSequences
 
     matrix = np.zeros((numberOfSequences, numberOfSequences))
 
@@ -193,6 +205,5 @@ def kimura(fileObject, typeOfInput):
                                                                                                   math.e)
             matrix[i][j] = distance
             matrix[j][i] = distance
-        print i
 
-    return matrix
+    return matrix, nameList

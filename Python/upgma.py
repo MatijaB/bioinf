@@ -1,7 +1,9 @@
+#!/usr/bin/python
+
 from upgma_lib import *
 import os
 import time
-import sys
+import argparse
 
 def main(distanceFunction, path, type):
     """
@@ -91,16 +93,37 @@ def main(distanceFunction, path, type):
 
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(
+        description="Creates and shows a Newick tree from a file containing aligned sequences in either multiFASTA"
+                    " format or a txt file containing one sequence in each file (FASTA or SEQ).\n Default run can be"
+                    " done without any additional arguments. The default file is defaultTestFile.fasta, and the default"
+                    " model is Jukes-Cantor (JC69). Default run time around 2 minutes."
+    )
+    parser.add_argument('--file', type=str, default="defaultTestFile.fasta", help="Path to the input file.")
+    parser.add_argument('--type', type=int, default=0, help="0 for FASTA, 1 for SEQ filetype. FASTA is the default type.")
+    parser.add_argument('--model', type=int, default=0, help="0 for JC69, 1 for K80.")
+
+    args = parser.parse_args()
+
+    if args.type == 0:
+        type = "FASTA"
+    elif args.type == 1:
+        type = "SEQ"
+    else:
+        print "Error in arguments, exiting now!"
+        exit()
+
     start = time.time()
-
-    #print sys.argv
-
-    if sys.argv[3] in ['kimura', 'k80', 'K80', 'Kimura']:
-        newickString = main(kimura, sys.argv[1], sys.argv[2])
-
-    elif sys.argv[3] in ['JC69', 'jc69', 'jukescantor', 'jukes-cantor', 'Jukes-Cantor']:
-        newickString = main(jukesCantor, sys.argv[1], sys.argv[2])
-
+    if args.model == 1:
+        print "JC69"
+        newickString = main(kimura, args.file, type)
+    elif args.model == 0:
+        print "K80"
+        newickString = main(jukesCantor, args.file, type)
+    else:
+        print "Error in arguments, exiting now!"
+        exit()
 
     NewFile = open("newick.txt", 'w+')
 
