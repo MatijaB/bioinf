@@ -1,5 +1,7 @@
+#!/usr/bin/env ruby
+
 require 'narray'
-require 'c:\Users\Tibor\RubymineProjects\BioInf\upgma_lib'
+require 'upgma_lib'
 
 beginning = Time.now
 #   input arguments
