@@ -1,0 +1,13 @@
+Usage: upgma.py [-h] [--file FILE] [--type TYPE] [--model MODEL]
+
+Creates and shows a Newick tree from a file containing aligned sequences in
+either multiFASTA format or a txt file containing one sequence in each file
+(FASTA or SEQ). Default run can be done without any additional arguments. The
+default file is defaultTestFile.fasta, and the default model is Jukes-Cantor
+(JC69). Default run time around 2 minutes.
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --file FILE    Path to the input file.
+  --type TYPE    0 for FASTA, 1 for SEQ filetype. FASTA is the default type.
+  --model MODEL  0 for JC69, 1 for K80.
