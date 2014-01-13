@@ -115,10 +115,10 @@ if __name__ == '__main__':
         exit()
 
     start = time.time()
-    if args.model == 1:
+    if args.model == 0:
         print "JC69"
         newickString = main(kimura, args.file, type)
-    elif args.model == 0:
+    elif args.model == 1:
         print "K80"
         newickString = main(jukesCantor, args.file, type)
     else:
