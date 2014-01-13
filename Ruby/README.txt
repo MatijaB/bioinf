@@ -1,4 +1,4 @@
-The program has 2 required arguments.
+The program has 3 required arguments.
 
 Required:
 
