@@ -102,7 +102,7 @@ if __name__ == '__main__':
     )
     parser.add_argument('--file', type=str, default="defaultTestFile.fasta", help="Path to the input file.")
     parser.add_argument('--type', type=int, default=0, help="0 for FASTA, 1 for SEQ filetype. FASTA is the default type.")
-    parser.add_argument('--model', type=int, default=0, help="0 for JC69, 1 for K80.")
+    parser.add_argument('--model', type=int, default=0, help="0 for JC69, 1 for K80. JC69 is the default model.")
 
     args = parser.parse_args()
 
