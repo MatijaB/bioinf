@@ -104,6 +104,7 @@ end
           tmpSequence += line.strip
         end
       end
+      sequences.push(tmpSequence)
     else
       for line in file
         sequences.push(line.strip)
@@ -141,8 +142,8 @@ end
         j += 1
       }
       i += 1
-#      print i
-#      puts
+      print i
+      puts
     }
     matrix
   end
@@ -171,6 +172,7 @@ def kimura(file, type)
         tmpSequence += line.strip
       end
     end
+    sequences.push(tmpSequence)
   else
     for line in file
       sequences.push(line.strip)

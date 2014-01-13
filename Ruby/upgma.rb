@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'narray'
-require 'upgma_lib'
+require Dir.pwd + '/upgma_lib'
 
 beginning = Time.now
 #   input arguments
@@ -82,5 +82,5 @@ file = open("newick.txt",'w+')
 file.write(lastNode.instance_variable_get(:@name)+";")
 file.close()
 
-IO.popen("njplot.exe newick.txt")
+IO.popen("njplot newick.txt")
 puts "Total time: #{(Time.now - beginning).round(4)} sec"
