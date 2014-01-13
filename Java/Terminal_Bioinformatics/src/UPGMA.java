@@ -47,14 +47,14 @@ public class UPGMA {
 		// Prints out dissimilarity matrix
 		int i, id = 65;
 		
-		int j;
-
-		for(i = 0; i < dis_matrix.length; i++){
-			for(j = 0; j < dis_matrix.length; j++)
-				System.out.print(dis_matrix[i][j] + " ");
-			System.out.println();
-		}
-		System.out.println();
+//		int j;
+//
+//		for(i = 0; i < dis_matrix.length; i++){
+//			for(j = 0; j < dis_matrix.length; j++)
+//				System.out.print(dis_matrix[i][j] + " ");
+//			System.out.println();
+//		}
+//		System.out.println();
 		
 		// Adds each cluster to an ArrayList Tree
 		// Each Cluster gets an id of 1 character from ASCII table starting at decimal number 65
