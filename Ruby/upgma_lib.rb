@@ -142,8 +142,8 @@ end
         j += 1
       }
       i += 1
-      print i
-      puts
+#      print i
+#      puts
     }
     matrix
   end

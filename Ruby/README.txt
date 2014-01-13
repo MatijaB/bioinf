@@ -1,3 +1,6 @@
+Program has one external library ruby-narray.
+First install library with script upgma.sh and then run program.
+
 The program has 3 required arguments.
 
 Required:
