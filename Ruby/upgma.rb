@@ -1,12 +1,24 @@
 require 'narray'
-require 'pp'
 require 'c:\Users\Tibor\RubymineProjects\BioInf\upgma_lib'
 
 beginning = Time.now
+#   input arguments
 selectFile = ARGV[0]
 selectMode = ARGV[1]
+selectMethod = ARGV[2]
+#   sequence file
 txtfile = open(selectFile, 'r+')
-matrix = jukesCantor(txtfile, selectMode)
+
+beginning3 = Time.now
+if selectMethod == "jc69"
+  matrix = jukesCantor(txtfile, selectMode)
+elsif selectMethod == "k80"
+  matrix = kimura(txtfile, selectMode)
+else
+  abort("This method is not implemented")
+end
+puts "Sequence reading: #{(Time.now - beginning3).round(4)} sec"
+
 nameList = createNamingList()
 
 #   names the existing original nodes with lowercase letters from a to z
@@ -61,7 +73,7 @@ while matrix.shape[0] > 2
   matrix = matrix.delete_at(minimum[1])
 
 end
-puts "#{Time.now - beginning2}"
+puts "UPGMA: #{(Time.now - beginning2).round(4)} sec"
 lastNode = NewickNode.new(nodesArray,matrix[0,1])
 
 file = open("newick.txt",'w+')
@@ -69,4 +81,4 @@ file.write(lastNode.instance_variable_get(:@name)+";")
 file.close()
 
 IO.popen("njplot.exe newick.txt")
-puts "#{Time.now - beginning}"
+puts "Total time: #{(Time.now - beginning).round(4)} sec"

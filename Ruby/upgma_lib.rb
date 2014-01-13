@@ -141,6 +141,8 @@ end
         j += 1
       }
       i += 1
+#      print i
+#      puts
     }
     matrix
   end
@@ -211,6 +213,8 @@ def kimura(file, type)
       j += 1
     }
     i += 1
+#    print i
+#    puts
   }
   matrix
 end
