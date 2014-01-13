@@ -1,0 +1,30 @@
+Installation and run instructions:
+
+UPGMA.jar file is an executable file which should be run from the terminal via command: 
+
+sudo java -jar UPGMA.jar [argument1] [argument2]
+
+It is important when running UPGMA.jar that your working directory is "Bioinformatika" because of folder hierarchy.
+
+Also important is running UPGMA.jar with sudo privileges because of the executable file njplot.linux used for ploting the phylogeny tree in Newick format.
+If njplot is already installed this is not important.
+
+argument1 - integer argument specifying model of DNA evolution used for calculating the dissimilarity matrix
+Currently implemented models of DNA evolution: argument1 == 1 (JUKES CANTOR)
+					       argument1 == 2 (KIMURA 80)
+
+argument2 - path to a .txt file containing aligned DNA or RNA sequences in FASTA format
+
+
+
+
+
+
+UPGMA_GUI.jar is an executable file which should be run from the terminal via command:
+
+sudo java -jar UPGMA.jar
+
+Parameters are modified directly from GUI.
+
+
+Examples are provided: Complete HIV-genome in .fasta format and sekvence.txt containing 241 sequences of HIV in .fasta format
