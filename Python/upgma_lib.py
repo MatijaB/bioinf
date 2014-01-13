@@ -151,10 +151,12 @@ def kimura(fileObject, typeOfInput):
     matrix: numpy matrix object
     """
     sequences = []
+    nameList = []
     tmpSequence = ""
     if typeOfInput == "FASTA":
         for line in fileObject:
             if line[0] == '>':
+                nameList.append(line.strip(">"))
                 if tmpSequence != "":
                     sequences.append(tmpSequence)
                     tmpSequence = ""

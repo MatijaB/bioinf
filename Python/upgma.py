@@ -93,16 +93,16 @@ def main(distanceFunction, path, type):
 if __name__ == '__main__':
     start = time.time()
 
-    print sys.argv
+    #print sys.argv
 
-    if sys.argv[3] in ['kimura','k80','K80','Kimura']:
+    if sys.argv[3] in ['kimura', 'k80', 'K80', 'Kimura']:
         newickString = main(kimura, sys.argv[1], sys.argv[2])
 
-    elif sys.argv[3] in ['JC69','jc69','jukescantor','jukes-cantor','Jukes-Cantor']:
+    elif sys.argv[3] in ['JC69', 'jc69', 'jukescantor', 'jukes-cantor', 'Jukes-Cantor']:
         newickString = main(jukesCantor, sys.argv[1], sys.argv[2])
 
 
-    NewFile = open("newick.txt",'w+')
+    NewFile = open("newick.txt", 'w+')
 
     NewFile.write(newickString)
 
