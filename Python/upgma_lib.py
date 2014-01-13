@@ -93,7 +93,7 @@ def readMatrixfromFile(filename):
 def jukesCantor(fileObject, typeOfInput):
     """
     Reads from an input file containing aligned sequences and creates a dissimilarity matrix.
-
+    Uses the Jukes Cantor (JC69) DNA Model
     Input:
     file: python file object
 
@@ -101,10 +101,12 @@ def jukesCantor(fileObject, typeOfInput):
     matrix: numpy matrix object
     """
     sequences = []
+    nameList = []
     tmpSequence = ""
     if typeOfInput == "FASTA":
         for line in fileObject:
             if line[0] == '>':
+                nameList.append(line.strip(">"))
                 if tmpSequence != "":
                     sequences.append(tmpSequence)
                     tmpSequence = ""
@@ -133,13 +135,14 @@ def jukesCantor(fileObject, typeOfInput):
             distance = -0.75 * math.log(1 - (4./3.)*(float(numdiff) / sequenceLength), math.e)
             matrix[i][j] = distance
             matrix[j][i] = distance
-        #print i
+        print i
 
-    return matrix
+    return matrix, nameList
 
 def kimura(fileObject, typeOfInput):
     """
     Reads from an input file containing aligned sequences and creates a dissimilarity matrix.
+    Uses the Kimura (K80) DNA Model
 
     Input:
     file: python file object

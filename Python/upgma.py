@@ -1,15 +1,31 @@
 from upgma_lib import *
 import os
 import time
+import sys
 
-def main(distanceFunction):
-    txtfile = open('sekvence1.txt', 'r+')
+def main(distanceFunction, path, type):
+    """
+    Creates a newick tree from a number of aligned sequences
+
+    Input:
+    distanceFunction: the descriptor of the distance function from upgma_lib used to calculate the dis. matrix
+    path: path to the input file containing aligned sequences
+    type: type of file, either "FASTA" or "SEQ"
+
+    Output:
+    newickString: a string containing the newick tree in string format
+    """
+    txtfile = open(path, 'r+')
     start = time.time()
-    matrix = distanceFunction(txtfile, "FASTA")
+    matrix, nameList = distanceFunction(txtfile, type)
     end = time.time()
-    print end - start
+    timeElapsed = (str(end-start)).split(".")
+    print "Trajanje "+distanceFunction.__name__+": "+timeElapsed[0]+" sec"
     start = time.time()
-    nameList = createNameList()
+
+    if len(nameList) == 0:
+        nameList = createNameList()
+
     #returns an error if the number of different characters between two sequences is over 75% of all characters
     if matrix == "Error":
         print "Greska"
@@ -64,24 +80,37 @@ def main(distanceFunction):
         matrix = np.delete(matrix, minimum[1],1)
 
         #print [node.name for node in nodesArray]
+
+    lastNode = NewickNode(nodesArray, matrix[0][1])
+
     end = time.time()
-    print end - start
-    return nodesArray, matrix
+    timeElapsed = (str(end-start)).split(".")
+    print "Trajanje UPGMA: "+timeElapsed[0]+" sec"
+
+    return lastNode.name + ";"
 
 
 if __name__ == '__main__':
     start = time.time()
-    array, matrix = main(kimura)
 
-    lastNode = NewickNode(array, matrix[0][1])
+    print sys.argv
+
+    if sys.argv[3] in ['kimura','k80','K80','Kimura']:
+        newickString = main(kimura, sys.argv[1], sys.argv[2])
+
+    elif sys.argv[3] in ['JC69','jc69','jukescantor','jukes-cantor','Jukes-Cantor']:
+        newickString = main(jukesCantor, sys.argv[1], sys.argv[2])
+
 
     NewFile = open("newick.txt",'w+')
 
-    NewFile.write(lastNode.name+";")
+    NewFile.write(newickString)
 
     NewFile.close()
 
+    end = time.time()
+    timeElapsed = (str(end-start)).split(".")
+    print "Ukupno trajanje: "+timeElapsed[0]+" sec"
+
     os.system("njplot newick.txt")
 
-    end = time.time()
-    print end - start
